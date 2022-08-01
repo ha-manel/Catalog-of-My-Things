@@ -11,10 +11,8 @@ class MusicAlbum < Item
     end
 
     def can_be_archived?
-        super && @on_spotify
+        super && @on_spotify == true
     end
-
-    def list_music_albums; end
 
     def add_music_album
         File.new('music_albums.json', 'w+') unless Dir.glob('*.json').include? 'music_albums.json'
@@ -30,3 +28,4 @@ class MusicAlbum < Item
 
         File.write('music_albums.json', music_albums.to_json)
     end
+end

@@ -6,6 +6,15 @@ class Item
     @archived=archived
     @id=id
   end
-  attr_reader :publish_date, :archived, :id
-
+  attr_reader :publish_date, :archived, :id, :author, :label, :genre
+  
+  def genre=(genre)
+    @genre=genre
+  end
+  def author=(author)
+    @author=author
+  end
+  def label=(label)
+    @label=label
+  end
 end    

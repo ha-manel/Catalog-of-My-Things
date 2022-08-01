@@ -72,7 +72,8 @@ class Main
     else
       puts '📚 Books list:'
       @books.each_with_index do |book, index|
-        puts "#{index + 1}-[Book] ID: #{book.id} | Publisher: #{book.publisher} | Publish date: #{book.publish_date} | Cover state: #{book.cover_state} | Archived: #{book.archived}"
+        puts "#{index + 1}-[Book] ID: #{book.id} | Publisher: #{book.publisher} |" \
+             "Publish date: #{book.publish_date} | Cover state: #{book.cover_state} | Archived: #{book.archived}"
       end
     end
   end
@@ -85,9 +86,9 @@ class Main
     genre = user_input("Book\'s genre: ")
     label = user_input("Book\'s label: ")
     new_book = Book.new(publish_date, publisher, cover_state)
-    new_book.genre= genre
-    new_book.label= label
-    new_book.author= author
+    new_book.genre = genre
+    new_book.label = label
+    new_book.author = author
     new_book.move_to_archive
     @books << new_book
     puts "The book (by #{author}) has been created successfully ✅"

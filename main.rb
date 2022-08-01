@@ -1,4 +1,12 @@
+require_relative 'book'
+require_relative 'books_controller'
+
 class Main
+  include BooksController
+  def initialize
+    @books = load_books
+  end
+
   def user_input(message)
     print message
     gets.chomp
@@ -27,6 +35,7 @@ class Main
 
       options(input)
     end
+    store_books(@books)
   end
 
   def options(input)
@@ -54,5 +63,34 @@ class Main
     else
       puts 'Please choose a valid number!'
     end
+  end
+
+  def list_books
+    puts '-' * 50
+    if @books.empty?
+      puts 'The books list is empty'
+    else
+      puts '📚 Books list:'
+      @books.each_with_index do |book, index|
+        puts "#{index + 1}-[Book] ID: #{book.id} | Publisher: #{book.publisher} |" \
+             "Publish date: #{book.publish_date} | Cover state: #{book.cover_state} | Archived: #{book.archived}"
+      end
+    end
+  end
+
+  def add_book
+    author = user_input("Book\'s author: ")
+    publish_date = user_input("Book\'s publish date: ")
+    publisher = user_input("Book\'s publisher: ")
+    cover_state = user_input("Book\'s cover state [good, bad]: ")
+    genre = user_input("Book\'s genre: ")
+    label = user_input("Book\'s label: ")
+    new_book = Book.new(publish_date, publisher, cover_state)
+    new_book.genre = genre
+    new_book.label = label
+    new_book.author = author
+    new_book.move_to_archive
+    @books << new_book
+    puts "The book (by #{author}) has been created successfully ✅"
   end
 end

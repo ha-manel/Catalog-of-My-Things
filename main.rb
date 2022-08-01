@@ -67,7 +67,7 @@ class Main
   end
 
   def add_game
-    multiplayer = user_input("Multiplayer: ")
+    multiplayer = user_input('Multiplayer: ')
     last_played = user_input('Last played at: ')
     publish_date = user_input('Publish date: ')
     Game.new(multiplayer, last_played, publish_date).add_game
@@ -83,9 +83,10 @@ class Main
       data = File.read('games.json').split
       games = JSON.parse(data.join)
     end
-     puts 'List of Games'
+    puts 'List of Games'
     games.each_with_index do |game, key|
-      puts "#{key + 1}) Multiplayer: #{game['multiplayer']} Last Played: #{game['last_played_at']} Publish Date: #{game['publish_date']}"
+      puts "#{key + 1}) Multiplayer: #{game['multiplayer']}" \
+           "Last Played: #{game['last_played_at']} Publish Date: #{game['publish_date']}"
     end
     puts ' '
   end
@@ -119,6 +120,3 @@ class Main
     puts "The book (by #{author}) has been created successfully ✅"
   end
 end
-
-main = Main.new
-main.start()

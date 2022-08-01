@@ -1,5 +1,6 @@
 require_relative 'book'
 require_relative 'books_controller'
+require_relative 'music_album'
 
 class Main
   include BooksController
@@ -92,5 +93,27 @@ class Main
     new_book.move_to_archive
     @books << new_book
     puts "The book (by #{author}) has been created successfully ✅"
+  end
+
+  def add_music_album
+    on_spotify = user_input("Music album\'s on spotify: ")
+    publish_date = user_input("Music album\'s publish date: ")
+    MusicAlbum.new(on_spotify, publish_date).add_music_album
+    puts "The music album has been created successfully ✅"
+  end
+
+  def list_music_albums
+    File.new('music_albums.json', 'w+') unless Dir.glob('*.json').include? 'music_albums.json'
+    if File.empty?('music_albums.json')
+      puts 'The music albums list is empty'
+    else
+      puts '🎶 Music albums list:'
+      data = File.read('music_albums.json').split
+      music_albums = JSON.parse(data.join)
+      music_albums.each_with_index do |music_album, index|
+        puts "#{index + 1}-[Music album] ID: #{music_album['id']} | On spotify: #{music_album['on_spotify']} |" \
+             "Publish date: #{music_album['publish_date']} | Archived: #{music_album['archived']}"
+      end
+    end
   end
 end

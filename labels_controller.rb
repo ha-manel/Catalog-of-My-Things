@@ -8,7 +8,7 @@ module LabelsController
     data = []
 
     labels.each do |label|
-      data << { id: label.id, name: label.name}
+      data << { id: label.id, name: label.name }
     end
     File.write(file, JSON.generate(data))
   end

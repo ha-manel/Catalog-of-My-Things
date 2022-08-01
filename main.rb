@@ -70,6 +70,7 @@ class Main
     multiplayer = user_input('Multiplayer: ')
     last_played = user_input('Last played at: ')
     publish_date = user_input('Publish date: ')
+    user_input('Archived? [true/false]: ')
     Game.new(multiplayer, last_played, publish_date).add_game
     puts "The Game with #{multiplayer} as mulptiplayer has been created successfully ✅"
   end

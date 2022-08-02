@@ -1,11 +1,16 @@
 require_relative 'book'
 require_relative 'books_controller'
+require_relative 'label'
+require_relative 'labels_controller'
 require_relative 'music_album'
 
 class Main
   include BooksController
+  include LabelsController
+
   def initialize
     @books = load_books
+    @labels = load_labels
   end
 
   def user_input(message)
@@ -24,19 +29,19 @@ class Main
           4- List all genres
           5- List all labels
           6- List all authors
-          7- List all sources
-          8- Add a book
-          9- Add a music album
-          10- Add a game
-          11- Quit'
+          7- Add a book
+          8- Add a music album
+          9- Add a game
+          10- Quit'
 
       input = user_input('Choose an option: ').to_i
 
-      break if input == 11
+      break if input == 10
 
       options(input)
     end
     store_books(@books)
+    store_labels(@labels)
   end
 
   def options(input)
@@ -54,12 +59,10 @@ class Main
     when 6
       list_authors
     when 7
-      list_sources
-    when 8
       add_book
-    when 9
+    when 8
       add_music_album
-    when 10
+    when 9
       add_game
     else
       puts 'Please choose a valid number!'
@@ -85,14 +88,27 @@ class Main
     publisher = user_input("Book\'s publisher: ")
     cover_state = user_input("Book\'s cover state [good, bad]: ")
     genre = user_input("Book\'s genre: ")
-    label = user_input("Book\'s label: ")
+    label = Label.new(user_input("Book\'s label: "))
     new_book = Book.new(publish_date, publisher, cover_state)
     new_book.genre = genre
     new_book.label = label
     new_book.author = author
     new_book.move_to_archive
     @books << new_book
+    @labels << label
     puts "The book (by #{author}) has been created successfully ✅"
+  end
+
+  def list_labels
+    puts '-' * 50
+    if @labels.empty?
+      puts 'The Labels list is empty'
+    else
+      puts '🏷️ Labels list:'
+      @labels.each_with_index do |label, index|
+        puts "#{index + 1}-[Label] ID: #{label.id} | Name: #{label.name}"
+      end
+    end
   end
 
   def add_music_album

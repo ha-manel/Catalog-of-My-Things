@@ -1,5 +1,7 @@
+require_relative 'game'
 require_relative 'book'
 require_relative 'books_controller'
+require_relative 'author'
 require_relative 'label'
 require_relative 'labels_controller'
 require_relative 'music_album'
@@ -69,6 +71,43 @@ class Main
     end
   end
 
+  def add_game
+    multiplayer = user_input('Multiplayer: ')
+    last_played = user_input('Last played at: ')
+    publish_date = user_input('Publish date: ')
+    genre = user_input('Genre: ')
+    label = user_input('Label: ')
+    author_first = user_input('Author First Name: ')
+    author_last = user_input('Author Last Name: ')
+    new_game = Game.new(multiplayer, last_played, publish_date)
+    new_game.add_game
+    new_game.genre = genre
+    new_game.label = label
+    author = Author.new(author_first, author_last)
+    new_game.author = author
+    new_game.move_to_archive
+    author.add_author
+
+    puts "The Game with #{multiplayer} as mulptiplayer has been created successfully ✅"
+  end
+
+  def list_games
+    File.new('games.json', 'w+') unless Dir.glob('*.json').include? 'games.json'
+
+    if File.empty?('games.json')
+      games = []
+    else
+      data = File.read('games.json').split
+      games = JSON.parse(data.join)
+    end
+    puts 'List of Games'
+    games.each_with_index do |game, key|
+      puts "#{key + 1}) Multiplayer: #{game['multiplayer']}" \
+           "Last Played: #{game['last_played_at']} Publish Date: #{game['publish_date']}"
+    end
+    puts ' '
+  end
+
   def list_books
     puts '-' * 50
     if @books.empty?
@@ -97,6 +136,21 @@ class Main
     @books << new_book
     @labels << label
     puts "The book (by #{author}) has been created successfully ✅"
+  end
+
+  def list_authors
+    File.new('authors.json', 'w+') unless Dir.glob('*.json').include? 'authors.json'
+
+    if File.empty?('authors.json')
+      authors = []
+    else
+      data = File.read('authors.json').split
+      authors = JSON.parse(data.join)
+    end
+
+    authors.each_with_index do |author, index|
+      puts "#{index + 1}) #{author['first_name']} #{author['last_name']}"
+    end
   end
 
   def list_labels

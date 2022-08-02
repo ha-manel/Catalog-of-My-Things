@@ -15,7 +15,8 @@ class Item
   end
 
   def author=(author)
-    @author = author
+    @author = { first_name: author.first_name, last_name: author.last_name }
+    author.items << self unless author.items.include?(self)
   end
 
   def label=(label)
@@ -32,3 +33,6 @@ class Item
     @archived = true if can_be_archived?
   end
 end
+
+# item = Item.new('08-08-2021')
+# p item

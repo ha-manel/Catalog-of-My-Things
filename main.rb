@@ -112,17 +112,18 @@ class Main
   end
 
   def add_music_album
-    on_spotify = user_input("Music album\'s on spotify[true, false]: ")
+    on_spotify = user_input("Music album\'s on spotify [true, false]: ")
     publish_date = user_input("Music album\'s publish date: ")
-    genre = user_input("album\'s genre[hiphop,classic]: ")
-    label = user_input("album\'s label: ")
-    author = user_input("album\'s author: ")
+    genre = user_input("Album\'s genre [hiphop, classic]: ")
+    label = Label.new(user_input("Album\'s label: "))
+    author = user_input("Album\'s singer: ")
     new_music_album = MusicAlbum.new(on_spotify, publish_date)
     new_music_album.genre = genre
     new_music_album.label = label
     new_music_album.author = author
     new_music_album.move_to_archive
     new_music_album.add_music_album
+    @labels << label
     puts 'The music album has been created successfully ✅'
   end
 

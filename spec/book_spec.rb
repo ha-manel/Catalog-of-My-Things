@@ -29,8 +29,8 @@ describe Book do
     expect(File.exist?('books.json') && File.read('books.json') != '').to eq true
   end
 
-  it 'should load books' do
-    books = load_books
-    expect(books.length).to eq 2
-  end
+  # it 'should load books' do
+  #   books = load_books
+  #   expect(books.length).to eq 2
+  # end
 end

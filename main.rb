@@ -98,7 +98,8 @@ class Main
   def add_music_album
     on_spotify = user_input("Music album\'s on spotify: ")
     publish_date = user_input("Music album\'s publish date: ")
-    MusicAlbum.new(on_spotify, publish_date).add_music_album
+    archived = user_input("Music album\'s archived(true/false): ")
+    MusicAlbum.new(on_spotify, publish_date, archived).add_music_album
     puts 'The music album has been created successfully ✅'
   end
 

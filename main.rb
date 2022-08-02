@@ -99,7 +99,7 @@ class Main
     on_spotify = user_input("Music album\'s on spotify: ")
     publish_date = user_input("Music album\'s publish date: ")
     MusicAlbum.new(on_spotify, publish_date).add_music_album
-    puts "The music album has been created successfully ✅"
+    puts 'The music album has been created successfully ✅'
   end
 
   def list_music_albums

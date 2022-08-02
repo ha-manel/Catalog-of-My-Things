@@ -23,7 +23,8 @@ class MusicAlbum < Item
       music_albums = JSON.parse(data.join)
     end
 
-    music_albums.push({ 'on_spotify' => @on_spotify, 'publish_date' => @publish_date, 'archived' => @archived })
+    music_albums.push({ 'id' => @id, 'on_spotify' => @on_spotify, 'publish_date' => @publish_date,
+                        'archived' => @archived })
 
     File.write('music_albums.json', music_albums.to_json)
   end

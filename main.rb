@@ -5,14 +5,18 @@ require_relative 'author'
 require_relative 'label'
 require_relative 'labels_controller'
 require_relative 'music_album'
+require_relative 'genre'
+require_relative 'genre_controller'
 
 class Main
   include BooksController
   include LabelsController
+  include GenreController
 
   def initialize
     @books = load_books
     @labels = load_labels
+    @genres = load_genres
   end
 
   def user_input(message)
@@ -44,6 +48,7 @@ class Main
     end
     store_books(@books)
     store_labels(@labels)
+    store_genres(@genres)
   end
 
   def options(input)
@@ -168,16 +173,20 @@ class Main
   def add_music_album
     on_spotify = user_input("Music album\'s on spotify [true, false]: ")
     publish_date = user_input("Music album\'s publish date: ")
-    genre = user_input("Album\'s genre [hiphop, classic]: ")
+    genre = Genre.new(user_input("Album\'s genre [hiphop, classic]: "))
     label = Label.new(user_input("Album\'s label: "))
-    author = user_input("Album\'s singer: ")
+    author_first = user_input('Author First Name: ')
+    author_last = user_input('Author Last Name: ')
+    # author = Author.new(user_input("Album\'s singer: "))
     new_music_album = MusicAlbum.new(on_spotify, publish_date)
+    author = Author.new(author_first, author_last)
     new_music_album.genre = genre
     new_music_album.label = label
     new_music_album.author = author
     new_music_album.move_to_archive
     new_music_album.add_music_album
     @labels << label
+    @genres << genre
     puts 'The music album has been created successfully ✅'
   end
 
@@ -192,6 +201,18 @@ class Main
       music_albums.each_with_index do |music_album, index|
         puts "#{index + 1}-[Music album] ID: #{music_album['id']} | On spotify: #{music_album['on_spotify']} |" \
              "Publish date: #{music_album['publish_date']} | Archived: #{music_album['archived']}"
+      end
+    end
+  end
+
+  def list_genres
+    puts '-' * 50
+    if @genres.empty?
+      puts 'The genres list is empty'
+    else
+      puts '🎶 Genres list:'
+      @genres.each_with_index do |genre, index|
+        puts "#{index + 1}-[Genre] ID: #{genre.id} | Name: #{genre.name}"
       end
     end
   end

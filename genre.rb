@@ -1,5 +1,5 @@
 class Genre
-    atte_accessor :items, :name, :id
+    attr_accessor :items, :name, :id
 
     def initialize(name, id=nil)
         @name = name

@@ -1,6 +1,6 @@
 require 'json'
 
-module GenreContoller
+module GenreController
     def store_genres(genres)
         file = './genres.json'
         File.new('genres.json', 'w+') unless File.exist?(file)

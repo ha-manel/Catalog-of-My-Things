@@ -20,7 +20,8 @@ class Item
   end
 
   def label=(label)
-    @label = label
+    @label = label.name
+    label.items << self unless label.items.include?(self)
   end
   # rubocop:enable Style/TrivialAccessors
 

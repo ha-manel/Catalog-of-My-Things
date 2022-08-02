@@ -2,11 +2,17 @@ require_relative 'game'
 require_relative 'book'
 require_relative 'books_controller'
 require_relative 'author'
+require_relative 'label'
+require_relative 'labels_controller'
+require_relative 'music_album'
 
 class Main
   include BooksController
+  include LabelsController
+
   def initialize
     @books = load_books
+    @labels = load_labels
   end
 
   def user_input(message)
@@ -25,19 +31,19 @@ class Main
           4- List all genres
           5- List all labels
           6- List all authors
-          7- List all sources
-          8- Add a book
-          9- Add a music album
-          10- Add a game
-          11- Quit'
+          7- Add a book
+          8- Add a music album
+          9- Add a game
+          10- Quit'
 
       input = user_input('Choose an option: ').to_i
 
-      break if input == 11
+      break if input == 10
 
       options(input)
     end
     store_books(@books)
+    store_labels(@labels)
   end
 
   def options(input)
@@ -55,12 +61,10 @@ class Main
     when 6
       list_authors
     when 7
-      list_sources
-    when 8
       add_book
-    when 9
+    when 8
       add_music_album
-    when 10
+    when 9
       add_game
     else
       puts 'Please choose a valid number!'
@@ -123,13 +127,14 @@ class Main
     publisher = user_input("Book\'s publisher: ")
     cover_state = user_input("Book\'s cover state [good, bad]: ")
     genre = user_input("Book\'s genre: ")
-    label = user_input("Book\'s label: ")
+    label = Label.new(user_input("Book\'s label: "))
     new_book = Book.new(publish_date, publisher, cover_state)
     new_book.genre = genre
     new_book.label = label
     new_book.author = author
     new_book.move_to_archive
     @books << new_book
+    @labels << label
     puts "The book (by #{author}) has been created successfully ✅"
   end
 
@@ -145,6 +150,49 @@ class Main
 
     authors.each_with_index do |author, index|
       puts "#{index + 1}) #{author['first_name']} #{author['last_name']}"
+    end
+  end
+
+  def list_labels
+    puts '-' * 50
+    if @labels.empty?
+      puts 'The Labels list is empty'
+    else
+      puts '🏷️ Labels list:'
+      @labels.each_with_index do |label, index|
+        puts "#{index + 1}-[Label] ID: #{label.id} | Name: #{label.name}"
+      end
+    end
+  end
+
+  def add_music_album
+    on_spotify = user_input("Music album\'s on spotify [true, false]: ")
+    publish_date = user_input("Music album\'s publish date: ")
+    genre = user_input("Album\'s genre [hiphop, classic]: ")
+    label = Label.new(user_input("Album\'s label: "))
+    author = user_input("Album\'s singer: ")
+    new_music_album = MusicAlbum.new(on_spotify, publish_date)
+    new_music_album.genre = genre
+    new_music_album.label = label
+    new_music_album.author = author
+    new_music_album.move_to_archive
+    new_music_album.add_music_album
+    @labels << label
+    puts 'The music album has been created successfully ✅'
+  end
+
+  def list_music_albums
+    File.new('music_albums.json', 'w+') unless Dir.glob('*.json').include? 'music_albums.json'
+    if File.empty?('music_albums.json')
+      puts 'The music albums list is empty'
+    else
+      puts '🎶 Music albums list:'
+      data = File.read('music_albums.json').split
+      music_albums = JSON.parse(data.join)
+      music_albums.each_with_index do |music_album, index|
+        puts "#{index + 1}-[Music album] ID: #{music_album['id']} | On spotify: #{music_album['on_spotify']} |" \
+             "Publish date: #{music_album['publish_date']} | Archived: #{music_album['archived']}"
+      end
     end
   end
 end

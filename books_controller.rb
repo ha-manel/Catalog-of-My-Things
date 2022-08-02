@@ -24,8 +24,7 @@ module BooksController
                           archived: book['archived'])
       new_book.genre = book['genre']
       new_book.author = book['author']
-      new_book.label = book['label']
-
+      new_book.label = Label.new(book['label'])
       data << new_book
     end
 

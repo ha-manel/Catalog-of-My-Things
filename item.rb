@@ -15,7 +15,7 @@ class Item
   end
 
   def author=(author)
-    @author = author
+    @author = {first_name: author.first_name, last_name: author.first_name}
     author.items << self unless author.items.include?(self)
   end
 

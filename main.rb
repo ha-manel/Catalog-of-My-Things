@@ -79,10 +79,10 @@ class Main
     new_game.add_game
     new_game.genre = genre
     new_game.label = label
-    new_game.author = {author_first: author_first, author_last: author_last}
+    authorR = Author.new(author_first, author_last)
+    new_game.author = authorR
     new_game.move_to_archive
-
-    Author.new(author_first, author_last).add_author
+    authorR.add_author
 
     puts "The Game with #{multiplayer} as mulptiplayer has been created successfully ✅"
   end

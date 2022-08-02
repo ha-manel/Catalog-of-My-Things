@@ -1,4 +1,5 @@
 require 'json'
+require 'date'
 require_relative 'item'
 
 class Game < Item
@@ -12,7 +13,7 @@ class Game < Item
   end
 
   def can_be_archived?
-    super && (Date.today.year - @last_played_at.year) > 2
+    (Date.today.year - @last_played_at.year) > 2
   end
 
   def add_game

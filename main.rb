@@ -75,12 +75,12 @@ class Main
     label = user_input('Label: ')
     author_first = user_input('Author First Name: ')
     author_last = user_input('Author Last Name: ')
-    user_input('Archived? [true/false]: ')
     new_game = Game.new(multiplayer, last_played, publish_date)
     new_game.add_game
     new_game.genre = genre
     new_game.label = label
     new_game.author = {author_first: author_first, author_last: author_last}
+    new_game.move_to_archive
 
     Author.new(author_first, author_last).add_author
 

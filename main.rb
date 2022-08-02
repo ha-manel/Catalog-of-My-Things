@@ -79,10 +79,10 @@ class Main
     new_game.add_game
     new_game.genre = genre
     new_game.label = label
-    authorR = Author.new(author_first, author_last)
-    new_game.author = authorR
+    author = Author.new(author_first, author_last)
+    new_game.author = author
     new_game.move_to_archive
-    authorR.add_author
+    author.add_author
 
     puts "The Game with #{multiplayer} as mulptiplayer has been created successfully ✅"
   end
@@ -145,6 +145,6 @@ class Main
 
     authors.each_with_index do |author, index|
       puts "#{index + 1}) #{author['first_name']} #{author['last_name']}"
-    end  
-  end  
+    end
+  end
 end

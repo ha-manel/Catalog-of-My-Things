@@ -1,6 +1,7 @@
 require_relative 'game'
 require_relative 'book'
 require_relative 'books_controller'
+require_relative 'author'
 
 class Main
   include BooksController
@@ -70,8 +71,19 @@ class Main
     multiplayer = user_input('Multiplayer: ')
     last_played = user_input('Last played at: ')
     publish_date = user_input('Publish date: ')
+    genre = user_input('Genre: ')
+    label = user_input('Label: ')
+    author_first = user_input('Author First Name: ')
+    author_last = user_input('Author Last Name: ')
     user_input('Archived? [true/false]: ')
-    Game.new(multiplayer, last_played, publish_date).add_game
+    new_game = Game.new(multiplayer, last_played, publish_date)
+    new_game.add_game
+    new_game.genre = genre
+    new_game.label = label
+    new_game.author = {author_first: author_first, author_last: author_last}
+
+    Author.new(author_first, author_last).add_author
+
     puts "The Game with #{multiplayer} as mulptiplayer has been created successfully ✅"
   end
 
@@ -120,4 +132,19 @@ class Main
     @books << new_book
     puts "The book (by #{author}) has been created successfully ✅"
   end
+
+  def list_authors
+    File.new('authors.json', 'w+') unless Dir.glob('*.json').include? 'authors.json'
+
+    if File.empty?('authors.json')
+      authors = []
+    else
+      data = File.read('authors.json').split
+      authors = JSON.parse(data.join)
+    end
+
+    authors.each_with_index do |author, index|
+      puts "#{index + 1}) #{author['first_name']} #{author['last_name']}"
+    end  
+  end  
 end

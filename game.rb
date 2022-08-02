@@ -15,8 +15,6 @@ class Game < Item
     super && (Date.today.year - @last_played_at.year) > 2
   end
 
-  def list_games; end
-
   def add_game
     File.new('games.json', 'w+') unless Dir.glob('*.json').include? 'games.json'
 

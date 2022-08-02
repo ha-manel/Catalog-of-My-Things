@@ -31,3 +31,6 @@ class Item
     @archived = true if can_be_archived?
   end
 end
+
+# item = Item.new('08-08-2021')
+# p item

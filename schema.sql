@@ -48,3 +48,8 @@ CREATE TABLE music_album(
   author_ID INT REFERENCES author(ID),
   genre_ID INT REFERENCES genre(ID)
 )
+
+CREATE TABLE genre(
+  ID SERIAL PRIMARY KEY,
+  name VARCHAR(30)
+)

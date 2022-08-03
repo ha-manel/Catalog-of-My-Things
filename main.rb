@@ -32,7 +32,7 @@ class Main
 
   def start
     puts '-' * 50
-    puts '⭐ Welcome to your catalog of things! ⭐'
+    puts '⭐  Welcome to your catalog of things! ⭐'
     loop do
       puts '-' * 50
       puts '

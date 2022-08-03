@@ -25,7 +25,7 @@ module AuthorsController
     else
       data = File.read('./author/authors.json').split
       authors = JSON.parse(data.join)
-      puts '🤵🏻 Authors list:'
+      puts '🤵 Authors list:'
       authors.each_with_index do |author, index|
         puts "#{index + 1}-[Author] First name: #{author['first_name']} | Last name: #{author['last_name']}"
       end

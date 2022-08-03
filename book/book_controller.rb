@@ -3,6 +3,7 @@ require 'json'
 module BooksController
   def store_books(books)
     return if books.empty?
+
     file = './book/books.json'
     File.new('./book/books.json', 'w+') unless File.exist?(file)
 

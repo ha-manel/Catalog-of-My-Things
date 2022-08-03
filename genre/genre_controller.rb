@@ -3,6 +3,7 @@ require 'json'
 module GenresController
   def store_genres(genres)
     return if genres.empty?
+
     file = './genre/genres.json'
     File.new('./genre/genres.json', 'w+') unless File.exist?(file)
     data = []

@@ -3,6 +3,7 @@ require 'json'
 module LabelsController
   def store_labels(labels)
     return if labels.empty?
+
     file = './label/labels.json'
     File.new('./label/labels.json', 'w+') unless File.exist?(file)
 

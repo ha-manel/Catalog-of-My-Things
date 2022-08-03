@@ -4,7 +4,7 @@ require_relative '../music_album/music_album_controller'
 describe MusicAlbum do
   include MusicAlbumsController
   it 'Should be an instance of music_album' do
-    music_album = MusicAlbum.new('test', '04-01-2010', '09-05-2017')
+    music_album = MusicAlbum.new(true, '04-01-2010')
     expect(music_album).to be_instance_of MusicAlbum
   end
 

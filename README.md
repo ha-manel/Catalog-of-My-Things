@@ -25,7 +25,7 @@ git clone git@github.com:ha-manel/Catalog-of-My-Things.git
 
 Run in cmd:
 ```
-ruby main.rb
+ruby app.rb
 ```
 
 ### Run The Tests

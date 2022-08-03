@@ -38,3 +38,18 @@ CREATE TABLE book(
   FOREIGN KEY (author_ID) REFERENCES author(ID),
   FOREIGN KEY(genre_ID) REFERENCES genre(ID)
 )
+
+CREATE TABLE music_album(
+  ID SERIAL PRIMARY KEY,
+  publish_date DATE NOT NULL,
+  on_spotify BOOLEAN NOT NULL,
+  archived BOOLEAN NOT NULL,
+  label_ID INT REFERENCES label(ID),
+  author_ID INT REFERENCES author(ID),
+  genre_ID INT REFERENCES genre(ID)
+)
+
+CREATE TABLE genre(
+  ID SERIAL PRIMARY KEY,
+  name VARCHAR(30)
+)

@@ -6,7 +6,7 @@ CREATE TABLE author(
   last_name VARCHAR(30),
 );
 
-CREATE TABLE book(
+CREATE TABLE game(
   ID SERIAL PRIMARY KEY,
   multiplayer VARCHAR(30) NOT NULL,
   last_played_at DATE NOT NULL,

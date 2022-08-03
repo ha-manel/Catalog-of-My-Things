@@ -9,9 +9,9 @@ class Item
     @id = id || Random.rand(1..1000)
   end
 
-  # rubocop:disable Style/TrivialAccessors
   def genre=(genre)
-    @genre = genre
+    @genre = genre.name
+    genre.items << self unless genre.items.include?(self)
   end
 
   def author=(author)
@@ -23,7 +23,6 @@ class Item
     @label = label.name
     label.items << self unless label.items.include?(self)
   end
-  # rubocop:enable Style/TrivialAccessors
 
   def can_be_archived?
     (Date.today.year - @publish_date.year) > 10
@@ -33,6 +32,3 @@ class Item
     @archived = true if can_be_archived?
   end
 end
-
-# item = Item.new('08-08-2021')
-# p item

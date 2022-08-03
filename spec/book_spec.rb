@@ -1,5 +1,5 @@
-require_relative '../book'
-require_relative '../books_controller'
+require_relative '../book/book'
+require_relative '../book/book_controller'
 require 'yaml'
 
 describe Book do
@@ -26,11 +26,6 @@ describe Book do
   it 'should store books' do
     books = [Book.new('20/10/2020', 'publisher', 'good'), Book.new('10/2/2021', 'publisher', 'bad')]
     store_books(books)
-    expect(File.exist?('books.json') && File.read('books.json') != '').to eq true
+    expect(File.exist?('./book/books.json') && File.read('./book/books.json') != '').to eq true
   end
-
-  # it 'should load books' do
-  #   books = load_books
-  #   expect(books.length).to eq 2
-  # end
 end

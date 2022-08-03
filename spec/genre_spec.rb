@@ -1,9 +1,9 @@
-require_relative '../genre'
-require_relative '../genre_controller'
-require_relative '../music_album'
+require_relative '../genre/genre'
+require_relative '../genre/genre_controller'
+require_relative '../music_album/music_album'
 
 describe Genre do
-  include GenreController
+  include GenresController
   it 'item should be added to array' do
     genre = Genre.new('genre')
     music_album = MusicAlbum.new('test', '20/10/2010', 'test')
@@ -14,11 +14,6 @@ describe Genre do
   it 'should store genres' do
     genres = [Genre.new('test1'), Genre.new('test2')]
     store_genres(genres)
-    expect(File.exist?('genres.json') && File.read('genres.json') != '').to eq true
-  end
-
-  it 'should load genres' do
-    genres = load_genres
-    expect(genres.length).to eq 2
+    expect(File.exist?('./genre/genres.json') && File.read('./genre/genres.json') != '').to eq true
   end
 end

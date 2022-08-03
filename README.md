@@ -5,6 +5,7 @@
 > A console app that will help to keep a record of different types of things: books, music albums, and games.
 > The data will be stored in JSON files but we also have a database with tables structure analogical to the program's class structure.
 
+![Untitled](https://user-images.githubusercontent.com/50721479/182598188-2f7f3bb2-bcde-4e3c-98a4-f7420201037a.png)
 
 ## Made With
 

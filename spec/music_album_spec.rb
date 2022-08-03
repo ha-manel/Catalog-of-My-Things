@@ -24,5 +24,6 @@ describe MusicAlbum do
     save_music_album(music_album)
     expect(File.exist?('./music_album/music_albums.json') &&
            File.read('./music_album/music_albums.json') != '').to eq true
+    File.write('./music_album/music_albums.json', '')
   end
 end

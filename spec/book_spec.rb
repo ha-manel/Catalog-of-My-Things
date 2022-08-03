@@ -27,5 +27,6 @@ describe Book do
     books = [Book.new('20/10/2020', 'publisher', 'good'), Book.new('10/2/2021', 'publisher', 'bad')]
     store_books(books)
     expect(File.exist?('./book/books.json') && File.read('./book/books.json') != '').to eq true
+    File.write('./book/books.json', '')
   end
 end

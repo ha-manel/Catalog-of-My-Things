@@ -23,5 +23,6 @@ describe Label do
     labels = [Label.new('label1'), Label.new('label2')]
     store_labels(labels)
     expect(File.exist?('./label/labels.json') && File.read('./label/labels.json') != '').to eq true
+    File.write('./label/labels.json', '')
   end
 end

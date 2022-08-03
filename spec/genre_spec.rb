@@ -15,5 +15,6 @@ describe Genre do
     genres = [Genre.new('test1'), Genre.new('test2')]
     store_genres(genres)
     expect(File.exist?('./genre/genres.json') && File.read('./genre/genres.json') != '').to eq true
+    File.write('./genre/genres.json', '')
   end
 end

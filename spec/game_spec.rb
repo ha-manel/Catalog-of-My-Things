@@ -23,5 +23,6 @@ describe Game do
     game = Game.new(true, '04-12-2011', '09-10-2017')
     save_game(game)
     expect(File.exist?('./game/games.json') && File.read('./game/games.json') != '').to eq true
+    File.write('./game/games.json', '')
   end
 end

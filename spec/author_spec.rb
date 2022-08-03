@@ -11,5 +11,6 @@ describe Author do
   it 'Shoud store author' do
     add_author(Author.new('Azel', 'Grey'))
     expect(File.exist?('./author/authors.json') && File.read('./author/authors.json') != '').to eq true
+    File.write('./author/authors.json', '')
   end
 end

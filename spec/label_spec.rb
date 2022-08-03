@@ -1,6 +1,6 @@
-require_relative '../label'
-require_relative '../labels_controller'
-require_relative '../book'
+require_relative '../label/label'
+require_relative '../label/label_controller'
+require_relative '../book/book'
 require 'yaml'
 
 describe Label do
@@ -22,11 +22,7 @@ describe Label do
   it 'should store labels' do
     labels = [Label.new('label1'), Label.new('label2')]
     store_labels(labels)
-    expect(File.exist?('labels.json') && File.read('labels.json') != '').to eq true
-  end
-
-  it 'should load labels' do
-    labels = load_labels
-    expect(labels.length).to eq 2
+    expect(File.exist?('./label/labels.json') && File.read('./label/labels.json') != '').to eq true
+    File.write('./label/labels.json', '')
   end
 end

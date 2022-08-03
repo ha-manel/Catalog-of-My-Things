@@ -1,4 +1,4 @@
-require_relative 'item'
+require_relative '../item'
 
 class Book < Item
   attr_accessor :publisher, :cover_state
@@ -10,6 +10,6 @@ class Book < Item
   end
 
   def can_be_archived?
-    (Date.today.year - @publish_date.year) > 10 || cover_state == 'bad'
+    super || cover_state == 'bad'
   end
 end

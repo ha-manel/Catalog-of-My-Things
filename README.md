@@ -11,6 +11,9 @@
 
 - Ruby
 
+## Presentation video:
+[Link to presentation video](https://drive.google.com/file/d/1h0jwxuBCH8hSqyJZixV9Am-SZroU-mte/view?usp=sharing)
+
 ## Getting Started
 
 ### Setup
